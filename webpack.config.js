@@ -1,21 +1,17 @@
 const path = require("path");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+// src/index.js - index.html 연결
+// src아래 sc(a)ss 파일 전부 index.html에 연결 (sass-loader -> css-loader -> style-loader 순서대로 동작)
+// public에 index.html, bundel.js 생성
 module.exports = {
-  entry: "./src/app.js",
+  mode: "development",
+  entry: "./src/js/index.js",
   output: {
     path: path.resolve(__dirname, "public"),
     filename: "bundle.js",
   },
-  plugins: [
-    // 컴파일 + 번들링 CSS 파일이 저장될 경로와 이름 지정
-    new MiniCssExtractPlugin({ filename: "css/style.css" }),
-    new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      filename: "./index.html", // 루트디렉토리 아래 public 아래 index.html 생성
-    }),
-  ],
+  plugins: [new HtmlWebpackPlugin({ filename: "index.html", template: "./src/index.html" })],
   module: {
     rules: [
       {
@@ -27,7 +23,7 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: ["style-loader", "css-loader", "sass-loader"],
         exclude: /node_modules/,
       },
     ],
