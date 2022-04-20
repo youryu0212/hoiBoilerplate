@@ -10,7 +10,7 @@ npm install --save-dev webpack webpack-cli
 
 npm install --save-dev babel-loader
 
-npm install --save-dev webpack webpack-cli css-loader sass sass-loader mini-css-extract-plugin
+npm install --save-dev webpack webpack-cli style-loader css-loader sass sass-loader mini-css-extract-plugin
 
 npm install --save-dev html-webpack-plugin
 
